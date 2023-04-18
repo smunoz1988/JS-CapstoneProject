@@ -20,3 +20,9 @@ strong {
   font-size: 35px;
   color: yellow;
 }
+
+footer {
+  padding: 1rem;
+  background-color: #7e5f5f;
+  color: white;
+}
