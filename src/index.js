@@ -1,3 +1,5 @@
+import './style.css';
+
 const apiDataPokemonDetail = async (number) => {
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}`, {
