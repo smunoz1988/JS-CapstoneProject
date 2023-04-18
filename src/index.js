@@ -25,14 +25,49 @@ const renderMainCards = async () => {
       <img src='${detail.sprites.front_default}'>
       <button>Like</button>
       <p>here will come the likes</p>
-      <button>comment</button>
+      <button class='pop-up'>comment</button>
       `;
       scoreContainer.innerHTML += pokemonCard;
+      const popUpButton = scoreContainer.querySelectorAll('.pop-up');
+      popUpButton.forEach((button, i) => {
+        button.addEventListener('click', async () => {
+          const pokemonDetails = await apiDataPokemonDetail(i + 1);
+          display(pokemonDetails);
+        });
+      });
     }
   } catch (error) {
     return error;
   }
   return null;
+};
+
+const display = (detail) => {
+  const body = document.querySelector('body');
+  body.classList.add('popup-open');
+  const popUp = document.createElement('div');
+  popUp.classList.add('pop-up-container');
+
+  const popUpContent = `
+    <img src='${detail.sprites.front_default}'>
+    <div>${detail.name}</div>
+    <p>Height: ${detail.height}</p>
+    <p>Weight: ${detail.weight}</p>
+    <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
+    <form>
+        <input type="text" id="name" placeholder="Enter Name" maxlength="30">
+        <textarea id="comment" maxlength="500">Write your comment here...</textarea>
+    </form>
+  `;
+
+  popUp.innerHTML = popUpContent;
+
+  popUp.addEventListener('click', (event) => {
+    event.stopPropagation();
+    body.classList.remove('popup-open');
+  });
+
+  document.body.appendChild(popUp);
 };
 
 renderMainCards();

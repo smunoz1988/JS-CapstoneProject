@@ -26,3 +26,19 @@ footer {
   background-color: #7e5f5f;
   color: white;
 }
+
+body.popup-open {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pop-up-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 85vh;
+  background-color: #7e5f5f;
+  margin: auto;
+}
