@@ -1,13 +1,24 @@
-import _ from 'lodash';
-import './style.css';
+// const apiData = {
+//   url: 'https://pokeapi.co/api/v2/pokemon?offset=20&limit=20'
+// };
 
-function component() {
-  const element = document.createElement('div');
+//const { get } = require("lodash")
 
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
-  return element;
-}
+// const {url} = apiData
 
-document.body.appendChild(component());
+// fetch(url)
+//   .then( (data) => console.log(data.json()));
+
+const apiData = async () => {
+  try {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon/1/', {
+      method: 'GET',
+    })
+    const responseDataApi = await response.json();
+    return responseDataApi
+  } catch (error) {
+    return error;
+  }
+};
+
+console.log(apiData());
