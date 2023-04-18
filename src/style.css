@@ -23,6 +23,12 @@ strong {
 
 footer {
   padding: 1rem;
+  width: 100%;
   background-color: #7e5f5f;
   color: white;
+  bottom: 0;
+}
+
+#popContainer {
+  display: none;
 }
