@@ -11,7 +11,7 @@
 
 const apiData = async () => {
   try {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon/1/', {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon/', {
       method: 'GET',
     })
     const responseDataApi = await response.json();
@@ -21,4 +21,21 @@ const apiData = async () => {
   }
 };
 
-console.log(apiData());
+const renderMainCards = async () => {
+  try {
+    const score = await apiData();
+    const { results } = score;
+    console.log(results);
+    const scoreContainer = document.getElementById('pokemon');
+    scoreContainer.innerHTML = '';
+    for (let i = 0; i < results.length; i++) {
+      const pokemonCard = `<div>${results[i].name}</div>`;
+      scoreContainer.innerHTML += pokemonCard;
+    }
+  } catch (error) {
+    return error;
+  }
+  return null;
+};
+
+renderMainCards();
