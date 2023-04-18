@@ -1,21 +1,10 @@
-// const apiData = {
-//   url: 'https://pokeapi.co/api/v2/pokemon?offset=20&limit=20'
-// };
-
-//const { get } = require("lodash")
-
-// const {url} = apiData
-
-// fetch(url)
-//   .then( (data) => console.log(data.json()));
-
-const apiData = async () => {
+const apiDataPokemonDetail = async (number) => {
   try {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon/', {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}`, {
       method: 'GET',
     })
-    const responseDataApi = await response.json();
-    return responseDataApi
+    const responseDataDetail = await response.json();
+    return responseDataDetail
   } catch (error) {
     return error;
   }
@@ -23,13 +12,17 @@ const apiData = async () => {
 
 const renderMainCards = async () => {
   try {
-    const score = await apiData();
-    const { results } = score;
-    console.log(results);
     const scoreContainer = document.getElementById('pokemon');
     scoreContainer.innerHTML = '';
-    for (let i = 0; i < results.length; i++) {
-      const pokemonCard = `<div>${results[i].name}</div>`;
+    for (let i = 1; i < 20 + 1; i++) {
+      const detail = await apiDataPokemonDetail(i);
+      const pokemonCard = `
+      <div>${detail.name}</div>
+      <img src='${detail.sprites.front_default}'>
+      <button>Like</button>
+      <p>here will come the likes</p>
+      <button>comment</button>
+      `;
       scoreContainer.innerHTML += pokemonCard;
     }
   } catch (error) {
