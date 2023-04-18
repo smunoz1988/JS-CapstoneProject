@@ -12,6 +12,34 @@ const apiDataPokemonDetail = async (number) => {
   }
 };
 
+const display = (detail) => {
+  const body = document.querySelector('body');
+  body.classList.add('popup-open');
+  const popUp = document.createElement('div');
+  popUp.classList.add('pop-up-container');
+
+  const popUpContent = `
+    <img src='${detail.sprites.front_default}'>
+    <div>${detail.name}</div>
+    <p>Height: ${detail.height}</p>
+    <p>Weight: ${detail.weight}</p>
+    <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
+    <form>
+        <input type="text" id="name" placeholder="Enter Name" maxlength="30">
+        <textarea id="comment" maxlength="500">Write your comment here...</textarea>
+    </form>
+  `;
+
+  popUp.innerHTML = popUpContent;
+
+  popUp.addEventListener('click', (event) => {
+    event.stopPropagation();
+    body.classList.remove('popup-open');
+  });
+
+  document.body.appendChild(popUp);
+};
+
 const renderMainCards = async () => {
   try {
     const scoreContainer = document.getElementById('pokemon');
@@ -40,34 +68,6 @@ const renderMainCards = async () => {
     return error;
   }
   return null;
-};
-
-const display = (detail) => {
-  const body = document.querySelector('body');
-  body.classList.add('popup-open');
-  const popUp = document.createElement('div');
-  popUp.classList.add('pop-up-container');
-
-  const popUpContent = `
-    <img src='${detail.sprites.front_default}'>
-    <div>${detail.name}</div>
-    <p>Height: ${detail.height}</p>
-    <p>Weight: ${detail.weight}</p>
-    <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
-    <form>
-        <input type="text" id="name" placeholder="Enter Name" maxlength="30">
-        <textarea id="comment" maxlength="500">Write your comment here...</textarea>
-    </form>
-  `;
-
-  popUp.innerHTML = popUpContent;
-
-  popUp.addEventListener('click', (event) => {
-    event.stopPropagation();
-    body.classList.remove('popup-open');
-  });
-
-  document.body.appendChild(popUp);
 };
 
 renderMainCards();
