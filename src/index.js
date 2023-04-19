@@ -1,5 +1,6 @@
 import './style.css';
 
+//  get data from pokeapi
 const apiDataPokemonDetail = async (number) => {
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}`, {
@@ -12,17 +13,35 @@ const apiDataPokemonDetail = async (number) => {
   }
 };
 
-const createPokemonCard = (detail, index) => {
+//  get data from Involvement-API
+const getLikesApi = async (index) => {
+  try {
+    const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/t2cJ7KaFhU2NhoHQVMnI/likes/', {
+      method: 'GET',
+    });
+    const responseDataDetail = await response.json();
+    /* eslint-disable */
+    const result = responseDataDetail.find(({ item_id }) => item_id === `item${index}`);
+    /* eslint-enable */
+    return result.likes;
+  } catch (error) {
+    return error;
+  }
+};
+
+//  template for the cards in main
+const createPokemonCard = (detail, index, likes) => {
   const pokemonCard = `
     <div>${detail.name}</div>
     <img src='${detail.sprites.front_default}'>
     <button class='like'>Like</button>
-    <p class='likes'>here will come the likes</p>
+    <p class='likes'>${likes}</p>
     <button type='button' class='comment' data-index='${index}'>Comment</button>
   `;
   return pokemonCard;
 };
 
+//  create and render popup
 const showPopup = (detail) => {
   const popContainer = document.getElementById('popContainer');
   popContainer.innerHTML = '';
@@ -64,8 +83,9 @@ const renderMainCards = async () => {
     for (let i = 1; i < 20 + 1; i += 1) {
       /* eslint-disable */
       const detail = await apiDataPokemonDetail(i);
+      const likes = await getLikesApi(i)
       /* eslint-enable */
-      const pokemonCard = createPokemonCard(detail, i);
+      const pokemonCard = createPokemonCard(detail, i, likes);
       scoreContainer.innerHTML += pokemonCard;
     }
     addCommentEventListeners();
