@@ -12,9 +12,6 @@ const apiDataPokemonDetail = async (number) => {
   }
 };
 
-
-const display = async (detail) => {
-
 const getLikesApi = async (index) => {
   try {
     const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/t2cJ7KaFhU2NhoHQVMnI/likes/', {
@@ -30,8 +27,7 @@ const getLikesApi = async (index) => {
   }
 };
 
-const display = (detail) => {
-
+const display = async (detail) => {
   const body = document.querySelector('body');
   body.classList.add('popup-open');
   const popUp = document.createElement('div');
