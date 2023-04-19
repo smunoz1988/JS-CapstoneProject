@@ -64,7 +64,7 @@ const renderMainCards = async () => {
     for (let i = 1; i < 20 + 1; i += 1) {
       /* eslint-disable */
       const detail = await apiDataPokemonDetail(i);
-      const likes = await getLikesApi(i); //  here you can fix time on this
+      const likes = await getLikesApi(i);
       /* eslint-enable */
       const pokemonCard = `
       <div class=pokemonCard>
