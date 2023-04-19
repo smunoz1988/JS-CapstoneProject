@@ -27,6 +27,24 @@ const getLikesApi = async (index) => {
   }
 };
 
+const postlikes = async (id) => {
+  try {
+    const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/t2cJ7KaFhU2NhoHQVMnI/likes/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "item_id": `item${id}`
+    }),
+    });
+    const responseReceived = await response.json();
+    return responseReceived;
+  } catch (error) {
+    return error;
+  }
+};
+
 const display = (detail) => {
   const body = document.querySelector('body');
   body.classList.add('popup-open');
@@ -71,7 +89,7 @@ const renderMainCards = async () => {
       <div>${detail.name.toUpperCase()}</div>
       <img src='${detail.sprites.front_default}'>
       <button class='likeBtn'>Like</button>
-      <p>${likes}</p>
+      <p class='likeContainer'>${likes}</p>
       <button class='pop-up'>comment</button>
       </div>
       `;
@@ -82,6 +100,15 @@ const renderMainCards = async () => {
         button.addEventListener('click', async () => {
           const pokemonDetails = await apiDataPokemonDetail(i + 1);
           display(pokemonDetails);
+        });
+      });
+
+      const likeButton = scoreContainer.querySelectorAll('.likeBtn');
+      likeButton.forEach((button, i) => {
+        button.addEventListener('click', async () => {
+          await postlikes(i + 1);
+          const likeContainer = scoreContainer.querySelectorAll('.likeContainer');
+          likeContainer[i].innerHTML = await getLikesApi(i + 1) 
         });
       });
     }
