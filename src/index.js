@@ -35,8 +35,8 @@ const postlikes = async (id) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        "item_id": `item${id}`
-    }),
+        item_id: `item${id}`,
+      }),
     });
     const responseReceived = await response.json();
     return responseReceived;
@@ -108,7 +108,7 @@ const renderMainCards = async () => {
         button.addEventListener('click', async () => {
           await postlikes(i + 1);
           const likeContainer = scoreContainer.querySelectorAll('.likeContainer');
-          likeContainer[i].innerHTML = await getLikesApi(i + 1) 
+          likeContainer[i].innerHTML = await getLikesApi(i + 1);
         });
       });
     }
