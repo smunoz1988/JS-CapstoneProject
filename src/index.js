@@ -19,22 +19,24 @@ const display = (detail) => {
   popUp.classList.add('pop-up-container');
 
   const popUpContent = `
-    <img src='${detail.sprites.front_default}'>
-    <div>${detail.name}</div>
-    <p>Height: ${detail.height}</p>
-    <p>Weight: ${detail.weight}</p>
-    <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
-    <form>
-        <input type="text" id="name" placeholder="Enter Name" maxlength="30">
-        <textarea id="comment" maxlength="500">Write your comment here...</textarea>
-    </form>
-  `;
+  <img src='${detail.sprites.front_default}'>
+  <button class="close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+  <div>${detail.name}</div>
+  <p>Height: ${detail.height}</p>
+  <p>Weight: ${detail.weight}</p>
+  <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
+  <form>
+    <input type="text" id="name" placeholder="Enter Name" maxlength="30">
+    <textarea id="comment" maxlength="500">Write your comment here...</textarea>
+  </form>
+`;
 
+  popUp.classList.add('pop-up-container');
   popUp.innerHTML = popUpContent;
 
-  popUp.addEventListener('click', (event) => {
-    event.stopPropagation();
-    body.classList.remove('popup-open');
+  const closeButton = popUp.querySelector('.close');
+  closeButton.addEventListener('click', () => {
+    popUp.classList.add('hidden');
   });
 
   document.body.appendChild(popUp);

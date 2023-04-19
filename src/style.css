@@ -29,7 +29,6 @@ footer {
 
 body.popup-open {
   overflow: hidden;
-  pointer-events: none;
 }
 
 .pop-up-container {
@@ -41,4 +40,8 @@ body.popup-open {
   height: 85vh;
   background-color: #7e5f5f;
   margin: auto;
+}
+
+.pop-up-container.hidden {
+  display: none;
 }
