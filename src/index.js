@@ -12,6 +12,21 @@ const apiDataPokemonDetail = async (number) => {
   }
 };
 
+const getLikesApi = async (index) => {
+  try {
+    const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/t2cJ7KaFhU2NhoHQVMnI/likes/', {
+      method: 'GET',
+    });
+    const responseDataDetail = await response.json();
+    /* eslint-disable */
+    const result = responseDataDetail.find(({ item_id }) => item_id === `item${index}`);
+    /* eslint-enable */
+    return result.likes;
+  } catch (error) {
+    return 0;
+  }
+};
+
 const display = (detail) => {
   const body = document.querySelector('body');
   body.classList.add('popup-open');
@@ -49,15 +64,19 @@ const renderMainCards = async () => {
     for (let i = 1; i < 20 + 1; i += 1) {
       /* eslint-disable */
       const detail = await apiDataPokemonDetail(i);
+      const likes = await getLikesApi(i);
       /* eslint-enable */
       const pokemonCard = `
-      <div>${detail.name}</div>
+      <div class=pokemonCard>
+      <div>${detail.name.toUpperCase()}</div>
       <img src='${detail.sprites.front_default}'>
-      <button>Like</button>
-      <p>here will come the likes</p>
+      <button class='likeBtn'>Like</button>
+      <p>${likes}</p>
       <button class='pop-up'>comment</button>
+      </div>
       `;
       scoreContainer.innerHTML += pokemonCard;
+
       const popUpButton = scoreContainer.querySelectorAll('.pop-up');
       popUpButton.forEach((button, i) => {
         button.addEventListener('click', async () => {

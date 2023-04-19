@@ -21,10 +21,16 @@ strong {
   color: yellow;
 }
 
-footer {
+#pokemon {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-evenly;
+}
+
+.pokemonCard {
+  border: solid black 0.1rem;
+  margin: 1rem;
   padding: 1rem;
-  background-color: #7e5f5f;
-  color: white;
 }
 
 .pop-up-container {
@@ -40,4 +46,10 @@ footer {
 
 .pop-up-container.hidden {
   display: none;
+}
+
+footer {
+  padding: 1rem;
+  background-color: #7e5f5f;
+  color: white;
 }
