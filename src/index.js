@@ -12,22 +12,6 @@ const apiDataPokemonDetail = async (number) => {
   }
 };
 
-const renderMainCards = async () => {
-  try {
-    const scoreContainer = document.getElementById('pokemon');
-    scoreContainer.innerHTML = '';
-    for (let i = 1; i < 20 + 1; i += 1) {
-      const detail = await apiDataPokemonDetail(i);
-      const pokemonCard = createPokemonCard(detail, i);
-      scoreContainer.innerHTML += pokemonCard;
-    }
-    addCommentEventListeners();
-  } catch (error) {
-    return error;
-  }
-  return null;
-};
-
 const createPokemonCard = (detail, index) => {
   const pokemonCard = `
     <div>${detail.name}</div>
@@ -37,19 +21,6 @@ const createPokemonCard = (detail, index) => {
     <button type='button' class='comment' data-index='${index}'>Comment</button>
   `;
   return pokemonCard;
-};
-
-const addCommentEventListeners = () => {
-  const elements = document.getElementsByClassName('comment');
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].addEventListener("click", async () => {
-      const index = elements[i].dataset.index;
-      const detail = await apiDataPokemonDetail(index);
-      showPopup(detail);
-      const scoreContainer = document.getElementById('pokemon');
-      scoreContainer.style.display = 'none';
-    });
-  }
 };
 
 const showPopup = (detail) => {
@@ -64,7 +35,7 @@ const showPopup = (detail) => {
     <p>Type: ${detail.types[0].type.name}</p>
   `;
   popContainer.innerHTML += popup;
-  popContainer.style.display = "block";
+  popContainer.style.display = 'block';
   const closePop = document.getElementById('closePop');
   closePop.addEventListener('click', () => {
     popContainer.style.display = 'none';
@@ -73,5 +44,35 @@ const showPopup = (detail) => {
   });
 };
 
+const addCommentEventListeners = () => {
+  const elements = document.getElementsByClassName('comment');
+  for (let i = 0; i < elements.length; i += 1) {
+    elements[i].addEventListener('click', async () => {
+      const { dataset: { index } } = elements[i];
+      const detail = await apiDataPokemonDetail(index);
+      showPopup(detail);
+      const scoreContainer = document.getElementById('pokemon');
+      scoreContainer.style.display = 'none';
+    });
+  }
+};
+
+const renderMainCards = async () => {
+  try {
+    const scoreContainer = document.getElementById('pokemon');
+    scoreContainer.innerHTML = '';
+    for (let i = 1; i < 20 + 1; i += 1) {
+      /* eslint-disable */
+      const detail = await apiDataPokemonDetail(i);
+      /* eslint-enable */
+      const pokemonCard = createPokemonCard(detail, i);
+      scoreContainer.innerHTML += pokemonCard;
+    }
+    addCommentEventListeners();
+  } catch (error) {
+    return error;
+  }
+  return null;
+};
 
 renderMainCards();
