@@ -42,6 +42,38 @@ strong {
   height: 85vh;
   background-color: #7e5f5f;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.top {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.close {
+  height: 1rem;
+}
+
+.close i {
+  height: 1rem;
+}
+
+#name {
+  width: 25vw;
+  height: 1.5rem;
+  border: 1px solid black;
+}
+
+#comment {
+  width: 25vw;
+  height: 3rem;
+  border: 1px solid black;
 }
 
 .pop-up-container.hidden {

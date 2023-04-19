@@ -52,12 +52,15 @@ const display = async (detail) => {
   popUp.classList.add('pop-up-container');
 
   const popUpContent = `
+    <div class="top">
     <img src='${detail.sprites.front_default}'>
     <button class="close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+    </div>
     <div>${detail.name}</div>
     <p>Height: ${detail.height}</p>
     <p>Weight: ${detail.weight}</p>
     <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
+    <h2>Add Your Comment.</h2>
     <div class="comments-count">comments (8)</div>
     <div class="comments"></div>
     <form>
@@ -79,8 +82,7 @@ const display = async (detail) => {
     const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ErvLLCGB8PcsVhOAGDFz/comments?item_id=${detail.name}`);
     const comments = await response.json();
     commentsContainer.innerHTML = comments.map((comment) => `
-      <div>${comment.username}: ${comment.comment}</div>
-    `).join('');
+    <div>${comment.username}: ${comment.comment}</div>`).join('');
   } catch (error) {
     console.error(error);
   }
@@ -93,6 +95,9 @@ const display = async (detail) => {
     const username = nameInput.value;
     const comment = commentInput.value;
     if (username && comment) {
+      const newComment = document.createElement('div');
+      newComment.textContent = `${username}: ${comment}`;
+      commentsContainer.appendChild(newComment);
       try {
         const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ErvLLCGB8PcsVhOAGDFz/comments', {
           method: 'POST',
