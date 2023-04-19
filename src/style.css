@@ -27,10 +27,6 @@ footer {
   color: white;
 }
 
-body.popup-open {
-  overflow: hidden;
-}
-
 .pop-up-container {
   position: fixed;
   top: 50%;
