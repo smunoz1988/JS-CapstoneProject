@@ -12,36 +12,6 @@ const apiDataPokemonDetail = async (number) => {
   }
 };
 
-// const display = (detail) => {
-//   const body = document.querySelector('body');
-//   body.classList.add('popup-open');
-//   const popUp = document.createElement('div');
-//   popUp.classList.add('pop-up-container');
-
-//   const popUpContent = `
-//   <img src='${detail.sprites.front_default}'>
-//   <button class="close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
-//   <div>${detail.name}</div>
-//   <p>Height: ${detail.height}</p>
-//   <p>Weight: ${detail.weight}</p>
-//   <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
-//   <form>
-//     <input type="text" id="name" placeholder="Enter Name" maxlength="30">
-//     <textarea id="comment" maxlength="500">Write your comment here...</textarea>
-//   </form>
-// `;
-
-//   popUp.classList.add('pop-up-container');
-//   popUp.innerHTML = popUpContent;
-
-//   const closeButton = popUp.querySelector('.close');
-//   closeButton.addEventListener('click', () => {
-//     popUp.classList.add('hidden');
-//   });
-
-//   document.body.appendChild(popUp);
-// };
-
 const display = async (detail) => {
   const body = document.querySelector('body');
   body.classList.add('popup-open');
@@ -55,6 +25,7 @@ const display = async (detail) => {
     <p>Height: ${detail.height}</p>
     <p>Weight: ${detail.weight}</p>
     <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
+    <div class="comments-count">comments (8)</div>
     <div class="comments"></div>
     <form>
         <input type="text" id="name" placeholder="Enter Name" maxlength="30">
@@ -72,7 +43,7 @@ const display = async (detail) => {
 
   const commentsContainer = popUp.querySelector('.comments');
   try {
-    const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ErvLLCGB8PcsVhOAGDFz/comments');
+    const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ErvLLCGB8PcsVhOAGDFz/comments?item_id=${detail.name}`);
     const comments = await response.json();
     commentsContainer.innerHTML = comments.map((comment) => `
       <div>${comment.username}: ${comment.comment}</div>
@@ -80,6 +51,39 @@ const display = async (detail) => {
   } catch (error) {
     console.error(error);
   }
+
+  const commentButton = popUp.querySelector('.comment-button');
+  commentButton.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const nameInput = popUp.querySelector('#name');
+    const commentInput = popUp.querySelector('#comment');
+    const username = nameInput.value;
+    const comment = commentInput.value;
+    if (username && comment) {
+      try {
+        const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ErvLLCGB8PcsVhOAGDFz/comments', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            item_id: detail.name,
+            username,
+            comment,
+          }),
+        });
+        const result = await response.json();
+        result.classList = 'style';
+        commentsContainer.innerHTML += `
+          <div>${username}: ${comment}</div>
+        `;
+        nameInput.value = '';
+        commentInput.value = '';
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  });
 
   document.body.appendChild(popUp);
 };
