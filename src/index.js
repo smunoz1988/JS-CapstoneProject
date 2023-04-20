@@ -1,5 +1,5 @@
 import './style.css';
-import countComments from './module/commentCount.js';
+import { countComments, countCom } from './module/countFunctions.js';
 
 const apiDataPokemonDetail = async (number) => {
   try {
@@ -46,13 +46,6 @@ const postlikes = async (id) => {
   }
 };
 
-const countCom = () => {
-  const countCommentTest = document.getElementById('commentContainer');
-  const countCome = countCommentTest.children.length;
-  const resultCount = document.getElementById('commentCount');
-  resultCount.innerHTML = `Comments(${countCome})`;
-};
-
 const display = async (detail) => {
   const body = document.querySelector('body');
   body.classList.add('popup-open');
@@ -76,7 +69,7 @@ const display = async (detail) => {
     <div id='commentContainer' class="comments"></div>
     <form>
         <input type="text" id="name" placeholder="Enter Name" maxlength="30">
-        <textarea id="comment" maxlength="500">Write your comment here...</textarea>
+        <textarea id="comment" maxlength="500" placeholder='Write your comment here...'></textarea>
         <button class="comment-button">Comment</button>
     </form>
     </div>
