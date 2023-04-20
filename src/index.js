@@ -1,5 +1,5 @@
 import './style.css';
-import { countComments, countCom } from './module/countFunctions.js';
+import { countComments, countCom, countItemMain } from './module/countFunctions.js';
 
 const apiDataPokemonDetail = async (number) => {
   try {
@@ -130,12 +130,6 @@ const display = async (detail) => {
   });
   document.body.appendChild(popUp);
   countCom();
-};
-
-const countItemMain = (scoreContainer) => {
-  const direcChildren = scoreContainer.children.length;
-  const count = document.getElementById('count');
-  count.innerHTML = `Pokemons(${direcChildren})`;
 };
 
 const renderMainCards = async () => {
