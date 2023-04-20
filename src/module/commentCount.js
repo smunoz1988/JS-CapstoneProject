@@ -6,6 +6,7 @@ const countComments = () => {
     const count = countDivs.length;
     commentsCount.textContent = `Comments (${count})`;
   }
+  return count;
 };
 
 export default countComments;

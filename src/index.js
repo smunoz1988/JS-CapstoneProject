@@ -46,8 +46,14 @@ const postlikes = async (id) => {
   }
 };
 
+const countCom = () => {
+  const countCommentTest = document.getElementById('commentContainer');
+  const countCome = countCommentTest.children.length;
+  const resultCount = document.getElementById('commentCount');
+  resultCount.innerHTML = `Comments(${countCome})`;
+};
+
 const display = async (detail) => {
-  countComments();
   const body = document.querySelector('body');
   body.classList.add('popup-open');
   const popUp = document.createElement('div');
@@ -66,8 +72,8 @@ const display = async (detail) => {
     </div>
     <div class="third">
     <h2>Add Your Comment.</h2>
-    <div class="comments-count"></div>
-    <div class="comments"></div>
+    <div id='commentCount' class="comments-count"></div>
+    <div id='commentContainer' class="comments"></div>
     <form>
         <input type="text" id="name" placeholder="Enter Name" maxlength="30">
         <textarea id="comment" maxlength="500">Write your comment here...</textarea>
@@ -80,7 +86,7 @@ const display = async (detail) => {
 
   const closeButton = popUp.querySelector('.close');
   closeButton.addEventListener('click', () => {
-    popUp.classList.add('hidden');
+    popUp.remove();
   });
 
   const commentsContainer = popUp.querySelector('.comments');
@@ -104,6 +110,7 @@ const display = async (detail) => {
       const newComment = document.createElement('div');
       newComment.textContent = `${username}: ${comment}`;
       commentsContainer.appendChild(newComment);
+      countComments();
       try {
         const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ErvLLCGB8PcsVhOAGDFz/comments', {
           method: 'POST',
@@ -127,10 +134,9 @@ const display = async (detail) => {
         console.error(error);
       }
     }
-    countComments();
   });
-
   document.body.appendChild(popUp);
+  countCom();
 };
 
 const countItemMain = (scoreContainer) => {
@@ -186,5 +192,4 @@ const renderMainCards = async () => {
   return null;
 };
 
-countComments();
 renderMainCards();
