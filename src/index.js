@@ -1,4 +1,5 @@
 import './style.css';
+import countComments from './module/commentCount.js';
 
 const apiDataPokemonDetail = async (number) => {
   try {
@@ -45,6 +46,13 @@ const postlikes = async (id) => {
   }
 };
 
+const countCom = () => {
+  const countCommentTest = document.getElementById('commentContainer');
+  const countCome = countCommentTest.children.length;
+  const resultCount = document.getElementById('commentCount');
+  resultCount.innerHTML = `Comments(${countCome})`;
+};
+
 const display = async (detail) => {
   const body = document.querySelector('body');
   body.classList.add('popup-open');
@@ -53,28 +61,32 @@ const display = async (detail) => {
 
   const popUpContent = `
     <div class="top">
-    <img src='${detail.sprites.front_default}'>
-    <button class="close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+    <img class="img" src='${detail.sprites.front_default}'>
     </div>
+    <div class="second">
+    <button class="close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
     <div>${detail.name}</div>
     <p>Height: ${detail.height}</p>
     <p>Weight: ${detail.weight}</p>
     <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
+    </div>
+    <div class="third">
     <h2>Add Your Comment.</h2>
-    <div class="comments-count">comments (8)</div>
-    <div class="comments"></div>
+    <div id='commentCount' class="comments-count"></div>
+    <div id='commentContainer' class="comments"></div>
     <form>
         <input type="text" id="name" placeholder="Enter Name" maxlength="30">
         <textarea id="comment" maxlength="500">Write your comment here...</textarea>
         <button class="comment-button">Comment</button>
     </form>
+    </div>
   `;
 
   popUp.innerHTML = popUpContent;
 
   const closeButton = popUp.querySelector('.close');
   closeButton.addEventListener('click', () => {
-    popUp.classList.add('hidden');
+    popUp.remove();
   });
 
   const commentsContainer = popUp.querySelector('.comments');
@@ -98,6 +110,7 @@ const display = async (detail) => {
       const newComment = document.createElement('div');
       newComment.textContent = `${username}: ${comment}`;
       commentsContainer.appendChild(newComment);
+      countComments();
       try {
         const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ErvLLCGB8PcsVhOAGDFz/comments', {
           method: 'POST',
@@ -122,8 +135,8 @@ const display = async (detail) => {
       }
     }
   });
-
   document.body.appendChild(popUp);
+  countCom();
 };
 
 const countItemMain = (scoreContainer) => {
@@ -159,6 +172,7 @@ const renderMainCards = async () => {
         button.addEventListener('click', async () => {
           const pokemonDetails = await apiDataPokemonDetail(i + 1);
           display(pokemonDetails);
+          countComments();
         });
       });
 
