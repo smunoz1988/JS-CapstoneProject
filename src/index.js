@@ -1,4 +1,5 @@
 import './style.css';
+import countComments from './module/commentCount.js';
 
 const apiDataPokemonDetail = async (number) => {
   try {
@@ -46,6 +47,7 @@ const postlikes = async (id) => {
 };
 
 const display = async (detail) => {
+  countComments();
   const body = document.querySelector('body');
   body.classList.add('popup-open');
   const popUp = document.createElement('div');
@@ -53,21 +55,25 @@ const display = async (detail) => {
 
   const popUpContent = `
     <div class="top">
-    <img src='${detail.sprites.front_default}'>
-    <button class="close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+    <img class="img" src='${detail.sprites.front_default}'>
     </div>
+    <div class="second">
+    <button class="close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
     <div>${detail.name}</div>
     <p>Height: ${detail.height}</p>
     <p>Weight: ${detail.weight}</p>
     <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
+    </div>
+    <div class="third">
     <h2>Add Your Comment.</h2>
-    <div class="comments-count">comments (8)</div>
+    <div class="comments-count"></div>
     <div class="comments"></div>
     <form>
         <input type="text" id="name" placeholder="Enter Name" maxlength="30">
         <textarea id="comment" maxlength="500">Write your comment here...</textarea>
         <button class="comment-button">Comment</button>
     </form>
+    </div>
   `;
 
   popUp.innerHTML = popUpContent;
@@ -121,6 +127,7 @@ const display = async (detail) => {
         console.error(error);
       }
     }
+    countComments();
   });
 
   document.body.appendChild(popUp);
@@ -159,6 +166,7 @@ const renderMainCards = async () => {
         button.addEventListener('click', async () => {
           const pokemonDetails = await apiDataPokemonDetail(i + 1);
           display(pokemonDetails);
+          countComments();
         });
       });
 
@@ -178,4 +186,5 @@ const renderMainCards = async () => {
   return null;
 };
 
+countComments();
 renderMainCards();

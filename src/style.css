@@ -98,42 +98,73 @@ header nav {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80vw;
-  height: 85vh;
+  width: 75vw;
+  height: 95vh;
   background-color: #7e5f5f;
   margin: auto;
-  display: flex;
+  display: grid;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  place-items: center;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(2, 50%);
   border: 1px solid black;
   border-radius: 4px;
 }
 
 .top {
   display: flex;
-  width: 100%;
+  width: 50%;
   justify-content: space-around;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.second {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.third {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row: 2;
+  padding-left: 30vw;
+}
+
+.comments {
+  max-height: 3rem;
+}
+
+.img {
+  width: 9rem;
+  height: auto;
+  background-color: pink;
 }
 
 .close {
   height: 1rem;
+  margin-left: 100%;
+  background-color: transparent;
 }
 
-.close i {
-  height: 1rem;
+.close .fa {
+  height: 3rem;
 }
 
 #name {
   width: 25vw;
   height: 1.5rem;
   border: 1px solid black;
+  margin-bottom: 5px;
 }
 
 #comment {
+  margin-top: 5px;
   width: 25vw;
   height: 3rem;
   border: 1px solid black;
+  margin-bottom: 5px;
 }
 
 .pop-up-container.hidden {
