@@ -126,6 +126,12 @@ const display = async (detail) => {
   document.body.appendChild(popUp);
 };
 
+const countItemMain = (scoreContainer) => {
+  const direcChildren = scoreContainer.children.length;
+  const count = document.getElementById('count');
+  count.innerHTML = `Pokemons(${direcChildren})`;
+};
+
 const renderMainCards = async () => {
   try {
     const scoreContainer = document.getElementById('pokemon');
@@ -137,10 +143,12 @@ const renderMainCards = async () => {
       /* eslint-enable */
       const pokemonCard = `
       <div class=pokemonCard>
-      <div>${detail.name.toUpperCase()}</div>
-      <img src='${detail.sprites.front_default}'>
-      <button class='likeBtn'>Like</button>
-      <p class='likeContainer'>${likes}</p>
+      <img class='cardImage' src='${detail.sprites.front_default}'>
+      <div class='nameLikeBtn'>
+        <div>${detail.name.toUpperCase()}</div>
+        <button class='likeBtn'></button>
+      </div>
+      <p class='likeContainer'>${likes} likes</p>
       <button class='pop-up'>comment</button>
       </div>
       `;
@@ -153,15 +161,17 @@ const renderMainCards = async () => {
           display(pokemonDetails);
         });
       });
+
       const likeButton = scoreContainer.querySelectorAll('.likeBtn');
       likeButton.forEach((button, i) => {
         button.addEventListener('click', async () => {
           await postlikes(i + 1);
           const likeContainer = scoreContainer.querySelectorAll('.likeContainer');
-          likeContainer[i].innerHTML = await getLikesApi(i + 1);
+          likeContainer[i].innerHTML = `${await getLikesApi(i + 1)} likes`;
         });
       });
     }
+    countItemMain(scoreContainer);
   } catch (error) {
     return error;
   }
