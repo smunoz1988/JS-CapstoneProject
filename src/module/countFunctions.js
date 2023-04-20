@@ -1,4 +1,4 @@
-const countComments = () => {
+export const countComments = () => {
   const commentsCount = document.querySelector('.comments-count');
   const commentContainer = document.querySelector('.comments');
   if (commentsCount && commentContainer) {
@@ -8,4 +8,9 @@ const countComments = () => {
   }
 };
 
-export default countComments;
+export const countCom = () => {
+  const countCommentTest = document.getElementById('commentContainer');
+  const countCome = countCommentTest.children.length;
+  const resultCount = document.getElementById('commentCount');
+  resultCount.innerHTML = `Comments(${countCome})`;
+};
