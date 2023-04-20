@@ -14,3 +14,9 @@ export const countCom = () => {
   const resultCount = document.getElementById('commentCount');
   resultCount.innerHTML = `Comments(${countCome})`;
 };
+
+export const countItemMain = (scoreContainer) => {
+  const direcChildren = scoreContainer.children.length;
+  const count = document.getElementById('count');
+  count.innerHTML = `Pokemons(${direcChildren})`;
+};
