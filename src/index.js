@@ -101,7 +101,7 @@ const renderMainCards = async () => {
       <div class=pokemonCard>
       <img class='cardImage' src='${detail.sprites.front_default}'>
       <div class='nameLikeBtn'>
-        <div>${detail.name.toUpperCase()}</div>
+        <div class='pokemonNames'>${detail.name.toUpperCase()}</div>
         <button class='likeBtn'></button>
       </div>
       <p class='likeContainer'>${likes} likes</p>
