@@ -3,6 +3,7 @@ body {
   padding: 0;
   background-image: url(./Assets/backgroundwhite.png);
   background-size: contain;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 header nav {
@@ -19,6 +20,10 @@ header nav {
   font-size: 25px;
 }
 
+.navItem {
+  display: none;
+}
+
 #logoContainer {
   background-image: url(./Assets/logo.svg);
   background-size: cover;
@@ -30,7 +35,7 @@ header nav {
 #pokemon {
   width: 90%;
   display: grid;
-  grid-template-columns: 24% 24% 24% 24%;
+  grid-template-columns: 80%;
   justify-content: space-evenly;
   margin: auto;
   margin-top: 2rem;
@@ -55,6 +60,10 @@ header nav {
 .cardImage {
   width: 9rem;
   height: auto;
+}
+
+.pokemonNames {
+  font-weight: 700;
 }
 
 .nameLikeBtn {
@@ -99,50 +108,32 @@ header nav {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 75vw;
-  height: 95vh;
+  height: 100vh;
+  max-height: 600vh;
   background-color: #7e5f5f;
   margin: auto;
-  display: grid;
-  flex-direction: column;
-  place-items: center;
-  gap: 1rem;
-  grid-template-columns: repeat(2, 50%);
-  grid-template-rows: repeat(2, 50%);
   border: 1px solid black;
   border-radius: 8px;
-}
-
-.top {
-  display: flex;
-  width: 50%;
-  justify-content: space-around;
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.second {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.third {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row: 2;
-  padding-left: 30vw;
-}
-
-.comments {
-  max-height: 3rem;
+  overflow-x: hidden;
+  pointer-events: all;
+  z-index: 100;
 }
 
 .img {
-  width: 9rem;
+  width: 18rem;
   height: auto;
   background: linear-gradient(100deg, white, purple, white, purple);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
   border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.pokemon-name {
+  margin-top: 0.5rem;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 900;
 }
 
 @keyframes gradient {
@@ -159,29 +150,167 @@ header nav {
   }
 }
 
-.close {
-  height: 1rem;
-  margin-left: 100%;
-  background-color: transparent;
+.black {
+  width: 100%;
+  height: 3rem;
+  background-color: rgba(79, 42, 79, 0.279);
 }
 
-.close .fa {
-  height: 3rem;
+.close {
+  margin-left: 90%;
+  margin-top: 1rem;
+  border: none;
+  background: none;
+}
+
+.x-mark {
+  display: block;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin-top: 1rem;
+  appearance: none;
+  outline: none;
+  background: none;
+  border: none;
+  z-index: 4;
+}
+
+.x-mark::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background: #394554;
+  margin: 4px 0;
+  transition: 0.4s;
+  border-radius: 2px;
+  transform: rotate(-45deg) translate(-2.5px, 2px);
+}
+
+.x-mark::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background: #425162;
+  margin: 4px 0;
+  transition: 0.4s;
+  border-radius: 2px;
+  transform: rotate(45deg) translate(-2.5px, -2px);
+}
+
+.description {
+  font-size: x-large;
+}
+
+.add {
+  color: rgba(18, 0, 18, 0.279);
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.comments-count {
+  text-decoration: underline;
+}
+
+.comments {
+  background-color: rgba(79, 42, 79, 0.279);
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.top {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.second {
+  width: 100%;
+  padding-left: 1.5rem;
+}
+
+.third {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+body.popup-open {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+body.popup-close {
+  overflow: visible;
+  pointer-events: all;
+}
+
+form {
+  width: 100%;
+  display: grid;
+  place-items: center;
 }
 
 #name {
   width: 25vw;
   height: 1.5rem;
-  border: 1px solid black;
+  border: 2px solid black;
+  margin-top: 1rem;
   margin-bottom: 5px;
+  border-radius: 6px;
+  background-color: rgba(79, 42, 79, 0.279);
+  color: #fff;
+  box-shadow: 10px 5px 5px #000;
+  transition: all 2s;
 }
 
 #comment {
   margin-top: 5px;
   width: 25vw;
   height: 3rem;
-  border: 1px solid black;
+  border: 2px solid black;
   margin-bottom: 5px;
+  border-radius: 6px;
+  background-color: rgba(79, 42, 79, 0.279);
+  color: #fff;
+  box-shadow: 10px 5px 5px #000;
+  transition: all 2s;
+}
+
+#name:hover {
+  background-color: rgba(14, 0, 14, 0.279);
+  color: #978787;
+  border: 2px solid rgba(14, 0, 14, 0.279);
+  box-shadow: 5px 5px 5px #000;
+}
+
+#comment:hover {
+  background-color: rgba(14, 0, 14, 0.279);
+  color: #978787;
+  border: 2px solid rgba(14, 0, 14, 0.279);
+  box-shadow: 5px 5px 5px #000;
+}
+
+.comment-button {
+  width: 5rem;
+  height: 1.7rem;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background-color: rgba(79, 42, 79, 0.279);
+  color: #fff;
+  margin-bottom: 2rem;
+  box-shadow: 10px 5px 5px #000;
+  transition: all 2s;
+}
+
+.comment-button:hover {
+  background-color: rgba(14, 0, 14, 0.279);
+  color: #978787;
+  border: 2px solid rgba(14, 0, 14, 0.279);
+  box-shadow: 5px 5px 5px #000;
 }
 
 .pop-up-container.hidden {
@@ -198,4 +327,20 @@ footer {
 
 .disclamer {
   font-size: 0.75rem;
+}
+
+@media screen and (min-width: 768px) {
+  #pokemon {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%;
+    justify-content: space-evenly;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .navItem {
+    display: block;
+  }
 }

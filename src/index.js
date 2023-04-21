@@ -1,84 +1,41 @@
 import './style.css';
 import { countComments, countCom, countItemMain } from './module/countFunctions.js';
-
-const apiDataPokemonDetail = async (number) => {
-  try {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}`, {
-      method: 'GET',
-    });
-    const responseDataDetail = await response.json();
-    return responseDataDetail;
-  } catch (error) {
-    return error;
-  }
-};
-
-const getLikesApi = async (index) => {
-  try {
-    const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/t2cJ7KaFhU2NhoHQVMnI/likes/', {
-      method: 'GET',
-    });
-    const responseDataDetail = await response.json();
-    /* eslint-disable */
-    const result = responseDataDetail.find(({ item_id }) => item_id === `item${index}`);
-    /* eslint-enable */
-    return result.likes;
-  } catch (error) {
-    return 0;
-  }
-};
-
-const postlikes = async (id) => {
-  try {
-    const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/t2cJ7KaFhU2NhoHQVMnI/likes/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        item_id: `item${id}`,
-      }),
-    });
-    const responseReceived = await response.json();
-    return responseReceived;
-  } catch (error) {
-    return error;
-  }
-};
+import { apiDataPokemonDetail, getLikesApi, postlikes } from './module/apifunctionality.js';
 
 const display = async (detail) => {
-  const body = document.querySelector('body');
-  body.classList.add('popup-open');
   const popUp = document.createElement('div');
   popUp.classList.add('pop-up-container');
 
   const popUpContent = `
+  <div class="black"><button class="close"><div class="x-mark"></div></button></div>
     <div class="top">
     <img class="img" src='${detail.sprites.front_default}'>
+    <h1 class="pokemon-name">${detail.name.toUpperCase()}</h1>
     </div>
     <div class="second">
-    <button class="close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
-    <div>${detail.name}</div>
+    <div class="description add">Description</div>
     <p>Height: ${detail.height}</p>
     <p>Weight: ${detail.weight}</p>
     <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
     </div>
     <div class="third">
-    <h2>Add Your Comment.</h2>
-    <div id='commentCount' class="comments-count"></div>
+    <h2 class="add">Add Your Comment.</h2>
+    <h3 id='commentCount' class="comments-count"></h3>
     <div id='commentContainer' class="comments"></div>
+    </div>
     <form>
         <input type="text" id="name" placeholder="Enter Name" maxlength="30">
         <textarea id="comment" maxlength="500" placeholder='Write your comment here...'></textarea>
         <button class="comment-button">Comment</button>
     </form>
-    </div>
   `;
 
   popUp.innerHTML = popUpContent;
 
   const closeButton = popUp.querySelector('.close');
   closeButton.addEventListener('click', () => {
+    const body = document.querySelector('body');
+    body.classList.toggle('popup-close');
     popUp.remove();
   });
 
@@ -145,7 +102,7 @@ const renderMainCards = async () => {
       <div class=pokemonCard>
       <img class='cardImage' src='${detail.sprites.front_default}'>
       <div class='nameLikeBtn'>
-        <div>${detail.name.toUpperCase()}</div>
+        <div class='pokemonNames'>${detail.name.toUpperCase()}</div>
         <button class='likeBtn'></button>
       </div>
       <p class='likeContainer'>${likes} likes</p>
@@ -157,6 +114,8 @@ const renderMainCards = async () => {
       const popUpButton = scoreContainer.querySelectorAll('.pop-up');
       popUpButton.forEach((button, i) => {
         button.addEventListener('click', async () => {
+          const body = document.querySelector('body');
+          body.classList.toggle('popup-open');
           const pokemonDetails = await apiDataPokemonDetail(i + 1);
           display(pokemonDetails);
           countComments();
