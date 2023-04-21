@@ -1,117 +1,211 @@
-JS-CAPSTONE (POKEMON WEB)
+# Leaderboard
 
-📗 Table of Contents
+<a name="readme-top"></a>
 
-    📖 About the Project
-        🛠 Built With
-            Tech Stack
-            Key Features
-        🚀 Live Demo
-    💻 Getting Started
-        Setup
-        Prerequisites
-        Install
-        Usage
-        Run tests
-        Deployment
-    👥 Authors
-    🔭 Future Features
-    🤝 Contributing
-    ⭐️ Show your support
-    🙏 Acknowledgements
-    📝 License
+<!-- TABLE OF CONTENTS -->
 
-📖 Leaderboard
+# 📗 Table of Contents
 
-Leaderboard is a html, css and js project. Its only for educational purpose and it use webpack and jest test.
+- [📖 About the Project](#about-project)
+  - [🛠 Built With](#built-with)
+    - [Tech Stack](#tech-stack)
+    - [Key Features](#key-features)
+  - [🚀 Live Demo](#live-demo)
+  - [💻 Awesome books Presentation](#vgs-presentation)
+- [💻 Getting Started](#getting-started)
+  - [Setup](#setup)
+  - [Prerequisites](#prerequisites)
+  - [Install](#install)
+  - [Usage](#usage)
+  - [Run tests](#run-tests)
+  - [Deployment](#triangular_flag_on_post-deployment)
+- [👥 Authors](#authors)
+- [🔭 Future Features](#future-features)
+- [🤝 Contributing](#contributing)
+- [⭐️ Show your support](#support)
+- [🙏 Acknowledgements](#acknowledgements)
+- [❓ FAQ](#faq)
+- [📝 License](#license)
 
-Disclaimer: All Pokemon images used on this page are for educational purposes only. The copyrights for all Pokemon characters and related materials belong to their respective owners. This website is not affiliated with, endorsed, sponsored, or specifically approved by any company or organization related to the Pokemon franchise. The information presented on this website is for educational purposes only and should not be used for any other purpose. Thank you for visiting and learning more about the wonderful world of Pokemon!
+<!-- PROJECT DESCRIPTION -->
 
-🛠 Built With
-Tech Stack
-Client
-Server
-Database
-Key Features
+# 📖 jsCapstone-project <a name="about-project"></a>
 
-    Webpack
-    Use API to POST and GET scores data
+> In this project, We build a basic webapp which contains pokemon cards and display information from the API.
+## 🛠 Built With <a name="built-with"></a>
 
-(back to top)
-🚀 Live Demo
+### Tech Stack <a name="tech-stack"></a>
 
-  Nelify: https://charming-nougat-0d03a1.netlify.app/
+> This project uses the following stack :
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://www.w3schools.com/html/">HTML</a></li>
+    <li><a href="https://www.w3schools.com/css/">CSS</a></li>
+     <li><a href="https://www.w3schools.com/js/">JavaScript</a></li>
+  </ul>
+</details>
 
-  Video presenting the website features:
-  https://drive.google.com/file/d/1x3A61KS4p-l4cauWAvEhheclVeoLSsdE/view?usp=sharing
+<!-- Features -->
 
-(back to top)
-💻 Getting Started
+### Key Features <a name="key-features"></a>
 
+> Here are some key features of the application :
+- **The home page**
+- **The comments popup.**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## 💻 Getting Started <a name="getting-started"></a>
+
+> Clone the repository by clicking on the 'Code' button and copy the link
 To get a local copy up and running, follow these steps.
-Prerequisites
+
+### Prerequisites
 
 In order to run this project you need:
 
--IDE for example Visual Code or Atom.
-Setup
+- npm install
+- npm start
+
+### Setup
 
 Clone this repository to your desired folder:
 
-git@github.com:smunoz1988/JS-CapstoneProject.git
-Install
+Example commands:
+
+```sh
+  cd my-folder
+  https://github.com/smunoz1988/JS-CapstoneProject.git
+```
+
+-
+
+
+### Install
 
 Install this project with:
 
--Does not apply for the moment, just need a browser to open it. Mozilla Firefox recomended.
-Usage
+<!--
+Example command:
+```sh
+  cd my-project
+  npm install
+```
+--->
 
-To run the project:
+### Usage
 
--open de index.html in youre browser. Mozilla Firefox recomended. Made in Webpack.
-Run tests
+To run the project, execute the following command:
+Open the index.html file in a web browser using live server
 
-To run tests:
+<!--
+Example command:
+```sh
+  rails server
+```
+--->
 
--You can use linters to run test for this project.
-Deployment
+### Run tests
 
-You can deploy this project using tools as Parcel.
+To run tests, run the following command:
+Use npm test for the mock Jest
 
-(back to top)
-👥 Authors
+Example command:
 
-👤 Santiago Muñoz
+To run the webhint linter
 
-    GitHub: @smunoz
+```sh
+  npx hint .
+```
 
-👤 Tisloh Tebe
+To run the stylehint linter
 
-    GitHub: @Booze33
+```sh
+  npx stylehint "**/*.{css,scss}"
+```
 
-(back to top)
-🔭 Future Features
+To run the ESLint linter
 
-    Add mobile menu.
+```sh
+  npx eslint .
+```
 
-(back to top)
-🤝 Contributing
+### Deployment
+
+You can deploy this project using:
+- [Netlify](https://charming-nougat-0d03a1.netlify.app/) 
+
+### Project documentation
+Here is a documentation of our code:
+[video](https://drive.google.com/file/d/1x3A61KS4p-l4cauWAvEhheclVeoLSsdE/view)
+<!--
+Example:
+```sh
+```
+ -->
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- AUTHORS -->
+
+## 👥 Authors <a name="authors"></a>
+
+👤 **Tebe Tisloh**
+
+- GitHub: [@Booze33](https://github.com/Booze33)
+- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+
+👤 **Santiago Munoz**
+
+- GitHub: [@smunoz](https://github.com/smunoz1988)
+- Twitter: [@twitterhandle](https://twitter.com/Santiag24209785)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/santiago-munoz-0b2b1a260)
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FUTURE FEATURES -->
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- Contact Information
+- Navigation bar
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## 🤝 Contributing <a name="contributing"></a>
 
 Contributions, issues, and feature requests are welcome!
 
-(back to top)
-⭐️ Show your support
+Feel free to check the [issues page](../../issues/).
 
-If you like this project or have any advise just send me a message and I will be glad to work with you!
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-(back to top)
-🙏 Acknowledgments
+<!-- SUPPORT -->
 
-I would like to thank my coding partners! the have been a great support!
+## ⭐️ Show your support <a name="support"></a>
 
-(back to top)
-📝 License
+If you like this project star it!
 
-This project is MIT licensed.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-(back to top)
+<!-- ACKNOWLEDGEMENTS -->
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+I would like to thank the Microverse team.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- LICENSE -->
+
+## 📝 License <a name="license"></a>
+
+This project is [licensed](./LICENSE) .
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
