@@ -9,26 +9,27 @@ const display = async (detail) => {
   popUp.classList.add('pop-up-container');
 
   const popUpContent = `
+  <div class="black"><button class="close"><div class="x-mark"></div></button></div>
     <div class="top">
     <img class="img" src='${detail.sprites.front_default}'>
+    <h1 class="pokemon-name">${detail.name}</h1>
     </div>
     <div class="second">
-    <button class="close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
-    <div>${detail.name}</div>
+    <div class="description add">Description</div>
     <p>Height: ${detail.height}</p>
     <p>Weight: ${detail.weight}</p>
     <p>Abilities: ${detail.abilities.map((ability) => ability.ability.name).join(', ')}</p>
     </div>
     <div class="third">
-    <h2>Add Your Comment.</h2>
-    <div id='commentCount' class="comments-count"></div>
+    <h2 class="add">Add Your Comment.</h2>
+    <h3 id='commentCount' class="comments-count"></h3>
     <div id='commentContainer' class="comments"></div>
+    </div>
     <form>
         <input type="text" id="name" placeholder="Enter Name" maxlength="30">
         <textarea id="comment" maxlength="500" placeholder='Write your comment here...'></textarea>
         <button class="comment-button">Comment</button>
     </form>
-    </div>
   `;
 
   popUp.innerHTML = popUpContent;
