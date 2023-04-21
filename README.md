@@ -40,6 +40,8 @@ Key Features
 (back to top)
 🚀 Live Demo
 
+  Nelify: https://charming-nougat-0d03a1.netlify.app/
+
   Video presenting the website features:
   https://drive.google.com/file/d/1x3A61KS4p-l4cauWAvEhheclVeoLSsdE/view?usp=sharing
 
