@@ -112,6 +112,7 @@ header nav {
   border-radius: 8px;
   overflow-x: hidden;
   pointer-events: all;
+  z-index: 100;
 }
 
 .img {
@@ -231,6 +232,16 @@ header nav {
   width: 100%;
   display: grid;
   place-items: center;
+}
+
+body.popup-open {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+body.popup-close {
+  overflow: visible;
+  pointer-events: all;
 }
 
 form {

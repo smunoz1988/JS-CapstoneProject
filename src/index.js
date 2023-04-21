@@ -3,8 +3,6 @@ import { countComments, countCom, countItemMain } from './module/countFunctions.
 import { apiDataPokemonDetail, getLikesApi, postlikes } from './module/apifunctionality.js';
 
 const display = async (detail) => {
-  const body = document.querySelector('body');
-  body.classList.add('popup-open');
   const popUp = document.createElement('div');
   popUp.classList.add('pop-up-container');
 
@@ -12,7 +10,7 @@ const display = async (detail) => {
   <div class="black"><button class="close"><div class="x-mark"></div></button></div>
     <div class="top">
     <img class="img" src='${detail.sprites.front_default}'>
-    <h1 class="pokemon-name">${detail.name}</h1>
+    <h1 class="pokemon-name">${detail.name.toUpperCase()}</h1>
     </div>
     <div class="second">
     <div class="description add">Description</div>
@@ -36,6 +34,8 @@ const display = async (detail) => {
 
   const closeButton = popUp.querySelector('.close');
   closeButton.addEventListener('click', () => {
+    const body = document.querySelector('body');
+    body.classList.toggle('popup-close');
     popUp.remove();
   });
 
@@ -114,6 +114,8 @@ const renderMainCards = async () => {
       const popUpButton = scoreContainer.querySelectorAll('.pop-up');
       popUpButton.forEach((button, i) => {
         button.addEventListener('click', async () => {
+          const body = document.querySelector('body');
+          body.classList.toggle('popup-open');
           const pokemonDetails = await apiDataPokemonDetail(i + 1);
           display(pokemonDetails);
           countComments();
