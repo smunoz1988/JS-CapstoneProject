@@ -44,7 +44,7 @@ const display = async (detail) => {
     const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/ErvLLCGB8PcsVhOAGDFz/comments?item_id=${detail.name}`);
     const comments = await response.json();
     commentsContainer.innerHTML = comments.map((comment) => `
-    <div>${comment.username}: ${comment.comment}</div>`).join('');
+    <div class='comentItem'>${comment.username}: ${comment.comment}</div>`).join('');
   } catch (error) {
     console.error(error);
   }
